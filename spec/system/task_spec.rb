@@ -1,5 +1,10 @@
 require 'rails_helper'
 RSpec.describe 'タスク管理機能', type: :system do
+  before do
+    # あらかじめタスク一覧のテストで使用するためのタスクを二つ作成する
+    Task.create!(title: 'test_task_01', content: 'test_content_01')
+    Task.create!(title: 'test_task_02', content: 'test_content_01')
+  end
   #3種類のタスク管理機能のシステムのテストをする
   describe '新規作成機能' do
     context 'タスクを新規作成した場合' do
