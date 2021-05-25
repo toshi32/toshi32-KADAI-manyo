@@ -24,12 +24,10 @@
 
 ## Heroku へのデプロイ手順
 
-(Vagrant 環境)
-
 ### 1.Heroku にログイン
 
 ```ruby
-$ heroku login -i
+$ heroku login
 ```
 
 ### 2.Heroku に新しいアプリケーションを作成
