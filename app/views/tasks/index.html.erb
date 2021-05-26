@@ -3,13 +3,15 @@
 <table>
   <% @tasks.each do |task| %>
   <tr>
-    <td>タスク名: </td>
-    <td><%= task.title %></td>
-    <td>内容: </td>
-    <td><%= task.content %></td>
-    <td><%= link_to 'タスクの詳細確認', task_path(task.id) %></td>
-    <td><%= link_to 'タスクを編集する', edit_task_path(task.id), data: { confirm: '本当に編集していいですか？' } %></td>
-    <td><%= link_to 'タスクを削除する', task_path(task.id), method: :delete ,data: { confirm: '本当に削除していいですか？' } %></td>
+    <tr class="task_row">
+      <td>タスク名: </td>
+      <td><%= task.title %></td>
+      <td>内容: </td>
+      <td><%= task.content %></td>
+      <td><%= link_to 'タスクの詳細確認', task_path(task.id) %></td>
+      <td><%= link_to 'タスクを編集する', edit_task_path(task.id), data: { confirm: '本当に編集していいですか？' } %></td>
+      <td><%= link_to 'タスクを削除する', task_path(task.id), method: :delete ,data: { confirm: '本当に削除していいですか？' } %></td>
+    </tr>
   </tr>
   <% end %>
 </table>
