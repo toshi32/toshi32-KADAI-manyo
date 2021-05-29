@@ -4,6 +4,13 @@
   <%= link_to "登録日を昇順で並べる", tasks_path %>
   <%= link_to "終了日を降順で並べる", tasks_path(sort_expired: "true") %></p>
 </div>
+<div class="search_box">
+  <%= form_with(local: true, method: :get, url: tasks_path ) do |form| %>
+  <%= form.label :search_title, "タスク名" %>
+  <%= form.text_field :search_title, placeholder: "タスク名で検索" %>
+  <%= form.submit "検索", name: "search" %>
+  <% end %>
+</div>
 <table>
   <% @tasks.each do |task| %>
   <tr>

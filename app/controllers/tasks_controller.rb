@@ -3,10 +3,12 @@ class TasksController < ApplicationController
 
   def index
     #@tasks = Task.all.order(created_at: :desc)
-    if params[:sort_expired]
+    if params[:sort_expired]#終了日の降順ソート
       @tasks = Task.order(limit: :desc)
+    elsif params[:search]#タイトルのあいまい検索
+      @tasks = Task.where("title LIKE ?", "%#{params[:search_title]}%")
     else
-      @tasks = Task.order(created_at: :desc)
+      @tasks = Task.order(created_at: :desc)#新規タスクの投稿日昇順ソート
     end
   end
 
