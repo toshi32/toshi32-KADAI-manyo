@@ -19,7 +19,7 @@
 </div>
 <div class="task_title">
   <%= form.label :limit, "終了期限" %>
-  <%= form.date_select :limit, value: Time.zone.now %>
+  <%= form.date_select :limit %>
 </div>
 <%= form.submit %>
 <% end %>
