@@ -5,7 +5,7 @@
 <%= form.hidden_field :limit %>
 <p>タスク名:<%= @task.title %></p>
 <p>内容:<%= @task.content %></p>
-<p>終了期限:<%= l @task.limit, format: :long %></p>
+<p>終了日<%= l @task.limit, format: :long %></p>
 <%= form.submit  "登録する" %>
 <%= form.submit "戻る", name: 'back' %>
 <% end %>

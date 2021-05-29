@@ -6,4 +6,4 @@ ja:
       task:
         title: タスク名
         content: 内容
-        limit: 終了期限
+        limit: 終了日
