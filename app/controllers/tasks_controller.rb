@@ -6,7 +6,13 @@ class TasksController < ApplicationController
     if params[:sort_expired]#終了日の降順ソート
       @tasks = Task.order(limit: :desc)
     elsif params[:search]#タイトルのあいまい検索
-      @tasks = Task.where("title LIKE ?", "%#{params[:search_title]}%")
+      if params[:search_title] != "" && params[:search_status] != ""
+        @tasks = Task.where("title LIKE ?", "%#{params[:search_title]}%").where(status_name: params[:search_status])
+      elsif params[:search_title] != "" && params[:search_status] == ""
+        @tasks = Task.where("title LIKE ?", "%#{params[:search_title]}%")
+      else params[:search_title] == "" && params[:search_status] != ""
+        @tasks = Task.where(status_name: params[:search_status])
+      end
     else
       @tasks = Task.order(created_at: :desc)#新規タスクの投稿日昇順ソート
     end
