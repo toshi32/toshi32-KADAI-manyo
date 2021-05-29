@@ -5,6 +5,8 @@
 <p><%= @task.content %></p>
 <p>登録日</p>
 <p><%= @task.created_at %></p>
-<p>終了期限</p>
+<p>終了日</p>
 <p><%= @task.limit %></p>
+<p>ステータス</p>
+<p><%= @task.status_name %></p>
 <p><%= link_to 'Back', tasks_path(@task) %></p>

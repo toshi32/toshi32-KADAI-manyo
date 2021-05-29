@@ -21,6 +21,10 @@
   <%= form.label :limit, "終了日" %>
   <%= form.date_select :limit %>
 </div>
+<div class="task_title">
+  <%= form.label :status_name, "ステータス" %>
+  <%= form.select :status_name, ['未着手', '着手', '完了'] %>
+</div>
 <%= form.submit %>
 <% end %>
 <%= link_to "タスク一覧にもどる", tasks_path %>

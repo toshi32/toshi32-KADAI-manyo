@@ -12,6 +12,7 @@
     <td><strong>内容: </strong><%= task.content %></td>
     <td><strong>登録日: </strong><%= l task.created_at, format: :long %></td>
     <td><strong>終了日: </strong><%= l task.limit, format: :long %></td>
+    <td><strong>ステータス: </strong><%= task.status_name %></td>
   </tr>
   <td><%= link_to 'タスクの詳細確認', task_path(task.id) %></td>
   <td><%= link_to 'タスクを編集する', edit_task_path(task.id), data: { confirm: '本当に編集していいですか？' } %></td>

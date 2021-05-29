@@ -7,3 +7,4 @@ ja:
         title: タスク名
         content: 内容
         limit: 終了日
+        status_name: ステータス
