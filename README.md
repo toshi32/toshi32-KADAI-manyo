@@ -15,6 +15,7 @@
 | task_name | string   | タスク名 |
 | title     | text     | タイトル |
 | content   | string   | 内容     |
+| limit     | date     | 終了期限 |
 
 ### Label モデル
 
