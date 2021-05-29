@@ -4,16 +4,15 @@
   <% @tasks.each do |task| %>
   <tr>
   <tr class="task_row">
-    <td>タスク名: </td>
-    <td><%= task.title %></td>
-    <td>内容: </td>
-    <td><%= task.content %></td>
-    <td>終了期限: </td>
-    <td><%= task.limit %></td>
-    <td><%= link_to 'タスクの詳細確認', task_path(task.id) %></td>
-    <td><%= link_to 'タスクを編集する', edit_task_path(task.id), data: { confirm: '本当に編集していいですか？' } %></td>
-    <td><%= link_to 'タスクを削除する', task_path(task.id), method: :delete ,data: { confirm: '本当に削除していいですか？' } %></td>
+    <td><strong>タスク名: </strong><%= task.title %></td>
+    <td><strong>内容: </strong><%= task.content %></td>
+    <td><strong>登録日: </strong><%= l task.created_at, format: :long %></td>
+    <td><strong>終了期限: </strong><%= l task.limit, format: :long %></td>
   </tr>
+  <td><%= link_to 'タスクの詳細確認', task_path(task.id) %></td>
+  <td><%= link_to 'タスクを編集する', edit_task_path(task.id), data: { confirm: '本当に編集していいですか？' } %></td>
+  <td><%= link_to 'タスクを削除する', task_path(task.id), method: :delete ,data: { confirm: '本当に削除していいですか？' } %></td>
+
   </tr>
   <% end %>
 </table>
