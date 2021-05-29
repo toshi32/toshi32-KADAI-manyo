@@ -2,16 +2,17 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def index
-    #@tasks = Task.all.order(created_at: :desc)
     if params[:sort_expired]#終了日の降順ソート
       @tasks = Task.order(limit: :desc)
     elsif params[:search]#タイトルのあいまい検索
-      if params[:search_title] != "" && params[:search_status] != ""
-        @tasks = Task.where("title LIKE ?", "%#{params[:search_title]}%").where(status_name: params[:search_status])
-      elsif params[:search_title] != "" && params[:search_status] == ""
+      if params[:search_title].present? && params[:search_status].present?
+        @tasks = Task.where("title LIKE ?", "%#{params[:search_title]}%").where(status_name: params[:search_status].to_i)
+      elsif params[:search_title].present? && params[:search_status].blank?
         @tasks = Task.where("title LIKE ?", "%#{params[:search_title]}%")
-      else params[:search_title] == "" && params[:search_status] != ""
-        @tasks = Task.where(status_name: params[:search_status])
+      elsif params[:search_title].present? && params[:search_status].present?
+        @tasks = Task.where(status_name: params[:search_status].to_i)
+      else
+        @tasks = Task.order(created_at: :desc)
       end
     else
       @tasks = Task.order(created_at: :desc)#新規タスクの投稿日昇順ソート
