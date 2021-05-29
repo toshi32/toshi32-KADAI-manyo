@@ -1,9 +1,9 @@
 require 'rails_helper'
 RSpec.describe 'タスク管理機能', type: :system do
   # 各contextにある task = FactoryBot.create(:task, title: 'task') などを共通化
-  let!(:task) { FactoryBot.create(:task, title: 'task', content: 'task', limit: '2021-01-01 01:01:00') }
-  let!(:task2) { FactoryBot.create(:task, title: 'task2', content: 'task2', limit: '2021-02-02 02:02:00') }
-  let!(:task3) { FactoryBot.create(:task, title: 'task3', content: 'task3', limit: '2021-03-03 03:03:00') }
+  let!(:task) { FactoryBot.create(:task, title: 'task', content: 'task', limit: '2021-01-01') }
+  let!(:task2) { FactoryBot.create(:task, title: 'task2', content: 'task2', limit: '2021-02-02') }
+  let!(:task3) { FactoryBot.create(:task, title: 'task3', content: 'task3', limit: '2021-03-03') }
   before do
     # 「一覧画面に遷移した場合」や「タスクが作成日時の降順に並んでいる場合」など、contextが実行されるタイミングで、before内のコードが実行される
     visit tasks_path
@@ -14,6 +14,9 @@ RSpec.describe 'タスク管理機能', type: :system do
         visit new_task_path
         fill_in "タスク名", with: "task_name"
         fill_in "内容", with: "task_content"
+        find("#task_limit_1i").find("option[value='2021']").select_option
+        find("#task_limit_2i").find("option[value='1']").select_option
+        find("#task_limit_3i").find("option[value='1']").select_option
         click_on '登録する'
         expect(page).to have_content 'task_name'
       end
@@ -38,7 +41,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         click_on '終了日を降順で並べる'
       end
       task_list = all('.task_row')
-      expect(task_list[0]).to have_content 'task3'
+      expect(task_list[0]).to have_content 'task'
     end
   end
   describe '詳細表示機能' do
