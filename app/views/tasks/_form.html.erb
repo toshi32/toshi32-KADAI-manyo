@@ -17,6 +17,10 @@
   <%= form.label :content, "内容" %>
   <%= form.text_field :content %>
 </div>
+<div class="task_title">
+  <%= form.label :limit, "終了期限" %>
+  <%= form.text_field :limit %>
+</div>
 <%= form.submit %>
 <% end %>
 <%= link_to "タスク一覧にもどる", tasks_path %>
