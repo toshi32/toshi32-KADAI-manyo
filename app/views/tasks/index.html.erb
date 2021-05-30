@@ -10,7 +10,7 @@
   <%= form.label :search_title, "タスク名" %>
   <%= form.text_field :search_title, placeholder: "タスク名で検索" %>
   <%= form.label :search_status, "ステータス" %>
-  <%= form.select :search_status, options_for_select(Task.status_lists), { include_blank: '選択してください'} %>
+  <%= form.select :search_status, ['未着手', '着手', '完了'], { include_blank: '選択してください'} %>
   <%= form.submit "検索", name: "search" %>
   <% end %>
 </div>

@@ -6,11 +6,11 @@ class TasksController < ApplicationController
       @tasks = Task.order(limit: :desc)
     elsif params[:search]#タイトルのあいまい検索
       if params[:search_title].present? && params[:search_status].present?
-        @tasks = Task.where("title LIKE ?", "%#{params[:search_title]}%").where(status_name: params[:search_status].to_i)
-      elsif params[:search_title].present? && params[:search_status].blank?
+        @tasks = Task.where("title LIKE ?", "%#{params[:search_title]}%").where(status_name: params[:search_status])
+      elsif params[:search_title].present?  && params[:search_status].blank?
         @tasks = Task.where("title LIKE ?", "%#{params[:search_title]}%")
-      elsif params[:search_title].present? && params[:search_status].present?
-        @tasks = Task.where(status_name: params[:search_status].to_i)
+      elsif params[:search_title].blank? && params[:search_status].present?
+        @tasks = Task.where(status_name: params[:search_status])
       else
         @tasks = Task.order(created_at: :desc)
       end
