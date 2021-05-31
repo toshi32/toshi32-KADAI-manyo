@@ -54,7 +54,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         click_on '優先度で並び変える'
       end
       task_list = all('.task_row')
-      expect(task_list[0]).to have_content '高'
+      expect(task_list[0]).to have_content 'task'
     end
   end
   describe '検索機能' do
