@@ -4,6 +4,8 @@ class TasksController < ApplicationController
   def index
     if params[:sort_expired]#終了日の降順ソート
       @tasks = Task.order(limit: :desc)
+    elsif params[:sort_priority]
+      @tasks = Task.order(priority: :desc)
     elsif params[:search]#タイトルのあいまい検索
       if params[:search_title].present? && params[:search_status].present?
         @tasks = Task.where("title LIKE ?", "%#{params[:search_title]}%").where(status_name: params[:search_status])
@@ -62,7 +64,7 @@ class TasksController < ApplicationController
 
   private
   def task_params
-    params.require(:task).permit(:title, :content, :limit, :status_name)
+    params.require(:task).permit(:title, :content, :limit, :status_name, :priority)
   end
 
   def set_task

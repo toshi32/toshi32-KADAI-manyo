@@ -4,10 +4,12 @@
 <%= form.hidden_field :content %>
 <%= form.hidden_field :limit %>
 <%= form.hidden_field :status_name %>
+<%= form.hidden_field :priority %>
 <p>タスク名:<%= @task.title %></p>
 <p>内容:<%= @task.content %></p>
 <p>終了日<%= l @task.limit, format: :long %></p>
 <p>ステータス<%= @task.status_name %></p>
+<p>優先度<%= @task.priority %></P>
 <%= form.submit  "登録する" %>
 <%= form.submit "戻る", name: 'back' %>
 <% end %>

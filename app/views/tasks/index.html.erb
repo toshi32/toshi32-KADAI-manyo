@@ -3,7 +3,8 @@
 <%= link_to '一覧表示', tasks_path(@task) %>
 <div class="sort_select">
   <%= link_to "登録日を昇順で並べる", tasks_path %>
-  <%= link_to "終了日を降順で並べる", tasks_path(sort_expired: "true") %></p>
+  <%= link_to "終了日を降順で並べる", tasks_path(sort_expired: "true") %>
+  <%= link_to "優先度で並び変える", tasks_path(sort_expired: "true") %>
 </div>
 <div class="search_box">
   <%= form_with(local: true, method: :get, url: tasks_path ) do |form| %>
@@ -23,6 +24,7 @@
     <td><strong>登録日: </strong><%= l task.created_at, format: :long %></td>
     <td><strong>終了日: </strong><%= l task.limit, format: :long %></td>
     <td><strong>ステータス: </strong><%= task.status_name %></td>
+    <td><strong>優先度: </strong><%= task.priority %></td>
   </tr>
   <td><%= link_to 'タスクの詳細確認', task_path(task.id) %></td>
   <td><%= link_to 'タスクを編集する', edit_task_path(task.id), data: { confirm: '本当に編集していいですか？' } %></td>

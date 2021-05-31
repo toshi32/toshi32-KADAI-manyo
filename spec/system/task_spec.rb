@@ -43,7 +43,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         click_on '終了日を降順で並べる'
       end
       task_list = all('.task_row')
-      expect(task_list[0]).to have_content 'task'
+      expect(task_list[0]).to have_content 'task3'
     end
   end
   describe '検索機能' do
