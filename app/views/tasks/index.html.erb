@@ -4,7 +4,7 @@
 <div class="sort_select">
   <%= link_to "登録日を昇順で並べる", tasks_path %>
   <%= link_to "終了日を降順で並べる", tasks_path(sort_expired: "true") %>
-  <%= link_to "優先度で並び変える", tasks_path(sort_expired: "true") %>
+  <%= link_to "優先度で並び変える", tasks_path(sort_priority: "true") %>
 </div>
 <div class="search_box">
   <%= form_with(local: true, method: :get, url: tasks_path ) do |form| %>

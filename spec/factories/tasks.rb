@@ -5,5 +5,6 @@ FactoryBot.define do
     content { 'test_content' }
     limit { '2021-05-22 05:22:00' }
     status_name { "未着手" }
+    priority {1 }
   end
 end

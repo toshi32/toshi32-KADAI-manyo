@@ -1,9 +1,9 @@
 require 'rails_helper'
 RSpec.describe 'タスク管理機能', type: :system do
   # 各contextにある task = FactoryBot.create(:task, title: 'task') などを共通化
-  let!(:task) { FactoryBot.create(:task, title: 'task', content: 'task', limit: '2021-01-01', status_name: "未着手") }
-  let!(:task2) { FactoryBot.create(:task, title: 'task2', content: 'task2', limit: '2021-05-05', status_name: "着手") }
-  let!(:task3) { FactoryBot.create(:task, title: 'task3', content: 'task3', limit: '2021-06-06', status_name: "完了") }
+  let!(:task) { FactoryBot.create(:task, title: 'task', content: 'task', limit: '2021-01-01', status_name: "未着手", priority: "高") }
+  let!(:task2) { FactoryBot.create(:task, title: 'task2', content: 'task2', limit: '2021-05-05', status_name: "着手", priority: "中") }
+  let!(:task3) { FactoryBot.create(:task, title: 'task3', content: 'task3', limit: '2021-06-06', status_name: "完了", priority: "低") }
   before do
     # 「一覧画面に遷移した場合」や「タスクが作成日時の降順に並んでいる場合」など、contextが実行されるタイミングで、before内のコードが実行される
     visit tasks_path
@@ -18,9 +18,11 @@ RSpec.describe 'タスク管理機能', type: :system do
         find("#task_limit_2i").find("option[value='2']").select_option
         find("#task_limit_3i").find("option[value='2']").select_option
         find("#task_status_name").find("option[value='着手']").select_option
+        find("#task_priority").find("option[value='高']").select_option
         click_on '登録する'
         expect(page).to have_content 'task_name'
         expect(page).to have_content '着手'
+        expect(page).to have_content '高'
       end
     end
   end
@@ -43,7 +45,16 @@ RSpec.describe 'タスク管理機能', type: :system do
         click_on '終了日を降順で並べる'
       end
       task_list = all('.task_row')
-      expect(task_list[0]).to have_content 'task3'
+      expect(task_list[0]).to have_content 'task'
+    end
+  end
+  context 'タスクが優先順位の高い順で並んでいる場合' do
+    it '優先順位が高いタスクが一番上に表示される' do
+      within '.sort_select' do
+        click_on '優先度で並び変える'
+      end
+      task_list = all('.task_row')
+      expect(task_list[0]).to have_content '高'
     end
   end
   describe '検索機能' do
