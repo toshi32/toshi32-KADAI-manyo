@@ -16,8 +16,8 @@
 | title     | text     | タイトル   |
 | content   | string   | 内容       |
 | limit     | date     | 終了日     |
-| limit     | string   | ステータス |
-| limit     | integer  | 優先度     |
+| status    | string   | ステータス |
+| priority  | integer  | 優先度     |
 
 ### Label モデル
 
