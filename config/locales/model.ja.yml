@@ -6,3 +6,6 @@ ja:
       task:
         title: タスク名
         content: 内容
+        limit: 終了日
+        status_name: ステータス
+        priority: 優先度

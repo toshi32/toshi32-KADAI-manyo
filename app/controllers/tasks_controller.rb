@@ -2,7 +2,23 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def index
-    @tasks = Task.all.order(created_at: :desc)
+    if params[:sort_expired]#終了日の降順ソート
+      @tasks = Task.order(limit: :desc).page(params[:page]).per(5)
+    elsif params[:sort_priority]
+      @tasks = Task.order(priority: :desc).page(params[:page]).per(5)
+    elsif params[:search]#タイトルのあいまい検索
+      if params[:search_title].present? && params[:search_status].present?
+        @tasks = Task.where("title LIKE ?", "%#{params[:search_title]}%").where(status_name: params[:search_status]).page(params[:page]).per(5)
+      elsif params[:search_title].present?  && params[:search_status].blank?
+        @tasks = Task.where("title LIKE ?", "%#{params[:search_title]}%").page(params[:page]).per(5)
+      elsif params[:search_title].blank? && params[:search_status].present?
+        @tasks = Task.where(status_name: params[:search_status]).page(params[:page]).per(5)
+      else
+        @tasks = Task.order(created_at: :desc).page(params[:page]).per(5)
+      end
+    else
+      @tasks = Task.order(created_at: :desc).page(params[:page]).per(5)
+    end
   end
 
   def new
@@ -48,7 +64,7 @@ class TasksController < ApplicationController
 
   private
   def task_params
-    params.require(:task).permit(:title, :content)
+    params.require(:task).permit(:title, :content, :limit, :status_name, :priority)
   end
 
   def set_task
