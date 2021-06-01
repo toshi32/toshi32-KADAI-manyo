@@ -1,5 +1,8 @@
 <article class="admin_show">
   <h2>管理画面：ユーザー情報詳細</h2>
+  <% if notice %>
+    <p class="alert alert-info"><%= notice %></p>
+  <% end %>
   <section class="profile">
     <p><span class="item_name">ID</span> <%= @user.id %></p>
     <p><span class="item_name">名前</span> <%= @user.name %></p>

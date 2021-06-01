@@ -35,8 +35,11 @@ class Admin::UsersController < ApplicationController
   end
 
   def destroy
-    @user.destroy
-    redirect_to admin_users_path, notice:"ユーザー情報を削除しました"
+    if @user.destroy
+      redirect_to admin_users_path, notice:"ユーザー情報を削除しました"
+    else
+      redirect_to admin_users_path, notice:"削除できません。最低1ユーザーの登録が必要です。"
+    end
   end
 
   private
@@ -50,6 +53,6 @@ class Admin::UsersController < ApplicationController
   end
 
   def if_not_admin
-    redirect_to root_path unless current_user.admin == "管理者"
+    redirect_to root_path, notice:"警告！！管理画面へは管理者以外はアクセスできません。" unless admin?
   end
 end
