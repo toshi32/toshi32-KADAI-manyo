@@ -21,7 +21,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    if @user.id ! = current_user.id
+    if @user.id = current_user.id
       redirect_to tasks_path
     end
   end

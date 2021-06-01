@@ -10,13 +10,13 @@
 <% end %>
 
 <%= form_with(model: @user, local: true) do |f| %>
-  <%= f.label :name %><br>
-  <%= f.text_field :name %>
-  <%= f.label :email %><br>
-  <%= f.email_field :email %>
-  <%= f.label :password %>
-  <%= f.password_field :password %>
-  <%= f.label :password_confirmation %>
-  <%= f.password_field :password_confirmation %>
-  <%= f.submit "アカウントの新規作成" %>
+  <br><%= f.label :name %>
+  <%= f.text_field :name %><br>
+  <br><%= f.label :email %>
+  <%= f.email_field :email %><br>
+  <br><%= f.label :password %>
+  <%= f.password_field :password %><br>
+  <br><%= f.label :password_confirmation %>
+  <%= f.password_field :password_confirmation %><br>
+  <br><%= f.submit "アカウントの新規作成" %><br>
 <% end %>
