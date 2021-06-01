@@ -1,0 +1,28 @@
+<article class="admin_index">
+  <h2>管理画面：ユーザー一覧</h2>
+  <% if notice %>
+  <p class="alert alert-info"><%= notice %></p>
+  <% end %>
+
+  <p class="user_new"><%= link_to '新しくユーザーを作成する', new_admin_user_path %></p>
+
+  <ul class="tasklist flex">
+    <% @users.each do |user| %>
+    <li>
+      <p><span class="item_name">ID</span> <%= user.id %></p>
+      <p><span class="item_name">名前</span> <%= user.name %></p>
+      <p><span class="item_name">タスク数</span> <%= user.tasks.count %>件</p>
+      <div class="btns">
+        <div class="innerblock">
+          <%= link_to '詳細を確認する', admin_user_path(user.id), class: "show_user" %>
+          <%= link_to "ユーザー情報を編集する", edit_admin_user_path(user.id), data: { confirm: '本当に編集していいですか？' }, class: "edit_user" %>
+          <%= link_to 'ユーザー情報を削除する', admin_user_path(user.id), method: :delete ,data: { confirm: '本当に削除していいですか？' }, class: "delete_user" %>
+        </div>
+      </div>
+    </li>
+    <% end %>
+  </ul>
+  <div class="pagination_block">
+    <%= paginate @users %>
+  </div>
+</article>
