@@ -20,7 +20,7 @@
       <div class="lower">
         <p><span class="item_name">登録日</span> <%= l task.created_at, format: :long %></p>
         <p><span class="item_name">終了日</span> <%= l task.limit, format: :long %></p>
-        <p><span class="item_name">ステータス</span> <%= task.status %></p>
+        <p><span class="item_name">ステータス</span> <%= task.status_name %></p>
         <p><span class="item_name">優先度</span> <%= task.priority %></p>
       </div>
       <div class="btns">

@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      session[:user_id] = @user.id
+      #session[:user_id] = @user.id
       redirect_to user_path(@user.id), notice: "ユーザー情報を登録しました"
     else
       render :new
@@ -21,9 +21,9 @@ class UsersController < ApplicationController
   end
 
   def show
-    if @user.id = current_user.id
-      redirect_to tasks_path
-    end
+    # if @user.id = current_user.id
+    #   redirect_to tasks_path
+    # end
   end
 
   private

@@ -55,6 +55,8 @@ class TasksController < ApplicationController
   end
 
   def show
+    # @task = Task.find_by(id: params[:id])
+    # @user = User.find_by(id: @task.user_id)
   end
 
   def destroy
