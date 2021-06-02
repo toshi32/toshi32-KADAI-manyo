@@ -9,10 +9,15 @@ class TasksController < ApplicationController
     elsif params[:search]#タイトルのあいまい検索
       if params[:search_title].present? && params[:search_status].present?
         @tasks = current_user.tasks.where("title LIKE ?", "%#{params[:search_title]}%").where(status_name: params[:search_status]).page(params[:page]).per(5)
+        #@tasks = current_user.tasks.search_title(params[:search_title]).search_status(params[:search_status]).page(params[:page]).per(5)
       elsif params[:search_title].present?  && params[:search_status].blank?
+      #elsif params[:search_title].present?
         @tasks = current_user.tasks.where("title LIKE ?", "%#{params[:search_title]}%").page(params[:page]).per(5)
+        #@tasks = current_user.tasks.search_title(params[:search_title]).page(params[:page]).per(5)
       elsif params[:search_title].blank? && params[:search_status].present?
+      #elsif params[:search_status].present?
         @tasks = current_user.tasks.where(status_name: params[:search_status]).page(params[:page]).per(5)
+        #@tasks = current_user.tasks.search_status(params[:search_status]).page(params[:page]).per(5)
       else
         @tasks = current_user.tasks.order(created_at: :desc).page(params[:page]).per(5)
       end
