@@ -9,9 +9,9 @@ RSpec.describe 'ユーザー登録機能', type: :system do
         fill_in "user[password]", with: "password"
         fill_in "user[password_confirmation]", with: "password"
         click_on '登録する'
-        fill_in "session[email]", with: "test@test.com"
-        fill_in "session[password]", with: "password"
-        click_on 'commit'
+        # fill_in "session[email]", with: "test@test.com"
+        # fill_in "session[password]", with: "password"
+        # click_on 'commit'
         expect(page).to have_content 'test_user'
         expect(page).to have_content 'test@test.com'
       end
@@ -19,10 +19,10 @@ RSpec.describe 'ユーザー登録機能', type: :system do
     context 'ログインせずにタスク一覧画面に飛んだ場合' do
       it 'ログイン画面に遷移する' do
         visit tasks_path
-        expect(page).to have_content "ログイン"
-        expect(page).to have_content "メールアドレス"
-        expect(page).to have_content "パスワード"
-        expect(current_path).to have_content "/sessions/new"
+        # expect(page).to have_content "ログイン"
+        # expect(page).to have_content "メールアドレス"
+        # expect(page).to have_content "パスワード"
+        expect(current_path).to eq new_session_path
       end
     end
   end
@@ -30,24 +30,25 @@ RSpec.describe 'ユーザー登録機能', type: :system do
     context 'ログインした場合' do
       it '作成したユーザーが表示される' do
         user = FactoryBot.create(:user)
-        binding.irb
+        #binding.irb
         visit new_session_path
-        fill_in "session[email]", with: "user1@user1.com"
+        fill_in "session[email]", with: "user1@example.com"
         fill_in "session[password]", with: "5555555"
         within '.actions' do
           click_on 'ログイン'
         end
         expect(page).to have_content 'test_user1'
-        expect(page).to have_content 'user1@user1.com'
+        expect(page).to have_content 'user1@example.com'
       end
     end
+    #binding.irb
     context '自分の詳細画面に飛んだ場合' do
       it '自分の詳細ページに遷移する' do
         user1 = FactoryBot.create(:user)
         user2 = FactoryBot.create(:admin_user)
         visit new_session_path
-        fill_in "user[email]", with: "user1@user1.com"
-        fill_in "user[password]", with: "5555555"
+        fill_in "session[email]", with: "user1@example.com"
+        fill_in "session[password]", with: "5555555"
         within '.actions' do
           click_on 'ログイン'
         end
@@ -60,8 +61,8 @@ RSpec.describe 'ユーザー登録機能', type: :system do
       it 'ログイン画面に遷移する' do
         user = FactoryBot.create(:user)
         visit new_session_path
-        fill_in "user[email]", with: "user1@user1.com"
-        fill_in "user[password]", with: "5555555"
+        fill_in "session[email]", with: "user1@example.com"
+        fill_in "session[password]", with: "5555555"
         within '.actions' do
           click_on 'ログイン'
         end
@@ -76,21 +77,21 @@ RSpec.describe 'ユーザー登録機能', type: :system do
       it '管理画面に遷移する' do
         user = FactoryBot.create(:admin_user)
         visit new_session_path
-        fill_in "user[email]", with: "user2@user2.com"
-        fill_in "user[password]", with: "6666666"
+        fill_in "session[email]", with: "user2@example.com"
+        fill_in "session[password]", with: "6666666"
         within '.actions' do
           click_on 'ログイン'
         end
-        click_on '管理者画面'
-        expect(page).to have_content '管理者画面：ユーザー一覧'
+        click_on '管理画面'
+        expect(page).to have_content '管理画面：ユーザー一覧'
       end
     end
     context '一般ユーザーが管理画面にアクセスした場合' do
       it 'タスク一覧画面に遷移する' do
         user = FactoryBot.create(:user)
         visit new_session_path
-        fill_in "user[email]", with: "user1@user1.com"
-        fill_in "user[password]", with: "5555555"
+        fill_in "session[email]", with: "user1@example.com"
+        fill_in "session[password]", with: "5555555"
         within '.actions' do
           click_on 'ログイン'
         end
@@ -103,8 +104,8 @@ RSpec.describe 'ユーザー登録機能', type: :system do
       it '管理画面のユーザー詳細ページに遷移する' do
         user = FactoryBot.create(:admin_user)
         visit new_session_path
-        fill_in "user[email]", with: "user2@user2.com"
-        fill_in "user[password]", with: "6666666"
+        fill_in "session[email]", with: "user2@example.com"
+        fill_in "session[password]", with: "6666666"
         within '.actions' do
           click_on 'ログイン'
         end
@@ -116,7 +117,7 @@ RSpec.describe 'ユーザー登録機能', type: :system do
         fill_in "user[password_confirmation]", with: "password"
         click_on '登録する'
         expect(page).to have_content 'ユーザー情報を登録しました'
-        expect(page).to have_content '管理者画面：ユーザー情報詳細'
+        expect(page).to have_content '管理画面：ユーザー情報詳細'
       end
     end
     context '管理ユーザーが管理画面でユーザーの詳細ページに飛んだ場合' do
@@ -125,15 +126,15 @@ RSpec.describe 'ユーザー登録機能', type: :system do
         user2 = FactoryBot.create(:admin_user)
         visit new_session_path
         # binding.irb
-        fill_in "user[email]", with: "user2@user2.com"
-        fill_in "user[password]", with: "6666666"
+        fill_in "session[email]", with: "user2@example.com"
+        fill_in "session[password]", with: "6666666"
         within '.actions' do
           click_on 'ログイン'
         end
         visit admin_users_path
         visit admin_user_path(user1.id)
         # binding.irb
-        expect(page).to have_content '管理者画面：ユーザー情報詳細'
+        expect(page).to have_content '管理画面：ユーザー情報詳細'
         expect(page).to have_content 'user1'
       end
     end
@@ -142,8 +143,8 @@ RSpec.describe 'ユーザー登録機能', type: :system do
         user1 = FactoryBot.create(:user)
         user2 = FactoryBot.create(:admin_user)
         visit new_session_path
-        fill_in "user[email]", with: "user2@user2.com"
-        fill_in "user[password]", with: "6666666"
+        fill_in "session[email]", with: "user2@example.com"
+        fill_in "session[password]", with: "6666666"
         within '.actions' do
           click_on 'ログイン'
         end
@@ -155,7 +156,7 @@ RSpec.describe 'ユーザー登録機能', type: :system do
         fill_in "user[password_confirmation]", with: "password_edit"
         click_on '更新する'
         expect(page).to have_content 'ユーザー情報を編集しました'
-        expect(page).to have_content '管理者画面：ユーザー情報詳細'
+        expect(page).to have_content '管理画面：ユーザー情報詳細'
         expect(page).to have_content 'edit_user'
       end
     end
@@ -164,14 +165,15 @@ RSpec.describe 'ユーザー登録機能', type: :system do
         user1 = FactoryBot.create(:user)
         user2 = FactoryBot.create(:admin_user)
         visit new_session_path
-        fill_in "user[email]", with: "user2@user2.com"
-        fill_in "user[password]", with: "6666666"
+        fill_in "session[email]", with: "user2@example.com"
+        fill_in "session[password]", with: "6666666"
         within '.actions' do
           click_on 'ログイン'
         end
         # binding.irb
         visit admin_users_path
-        within '.ul li:first-child' do
+        #binding.irb
+        within 'ul li:first-child' do
           page.accept_confirm do #確認画面のボタンを押すため
             click_on 'ユーザー情報を削除する'
           end
