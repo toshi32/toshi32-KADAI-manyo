@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2021_06_02_035926) do
     t.text "content"
     t.date "created_at", null: false
     t.datetime "updated_at", null: false
-    t.date "limit", default: "2021-05-30", null: false
+    t.date "limit", default: "2021-06-03", null: false
     t.integer "priority", default: 1, null: false
     t.bigint "user_id"
     t.integer "status_name", default: 1, null: false
