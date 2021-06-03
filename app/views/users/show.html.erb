@@ -1,0 +1,6 @@
+<article class="user_show">
+  <h2><%= @user.name %>のページ</h2>
+  <p>メールアドレス: <%= @user.email %></p>
+</article>
+<%= link_to '新しくタスクを登録する', new_task_path %><br>
+<%= link_to 'タスク一覧', tasks_path %>

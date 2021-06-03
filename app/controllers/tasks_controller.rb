@@ -3,21 +3,26 @@ class TasksController < ApplicationController
 
   def index
     if params[:sort_expired]#終了日の降順ソート
-      @tasks = Task.order(limit: :desc).page(params[:page]).per(5)
+      @tasks = current_user.tasks.order(limit: :desc).page(params[:page]).per(5)
     elsif params[:sort_priority]
-      @tasks = Task.order(priority: :desc).page(params[:page]).per(5)
+      @tasks = current_user.tasks.order(priority: :desc).page(params[:page]).per(5)
     elsif params[:search]#タイトルのあいまい検索
       if params[:search_title].present? && params[:search_status].present?
-        @tasks = Task.where("title LIKE ?", "%#{params[:search_title]}%").where(status_name: params[:search_status]).page(params[:page]).per(5)
+        @tasks = current_user.tasks.where("title LIKE ?", "%#{params[:search_title]}%").where(status_name: params[:search_status]).page(params[:page]).per(5)
+        #@tasks = current_user.tasks.search_title(params[:search_title]).search_status(params[:search_status]).page(params[:page]).per(5)
       elsif params[:search_title].present?  && params[:search_status].blank?
-        @tasks = Task.where("title LIKE ?", "%#{params[:search_title]}%").page(params[:page]).per(5)
+      #elsif params[:search_title].present?
+        @tasks = current_user.tasks.where("title LIKE ?", "%#{params[:search_title]}%").page(params[:page]).per(5)
+        #@tasks = current_user.tasks.search_title(params[:search_title]).page(params[:page]).per(5)
       elsif params[:search_title].blank? && params[:search_status].present?
-        @tasks = Task.where(status_name: params[:search_status]).page(params[:page]).per(5)
+      #elsif params[:search_status].present?
+        @tasks = current_user.tasks.where(status_name: params[:search_status]).page(params[:page]).per(5)
+        #@tasks = current_user.tasks.search_status(params[:search_status]).page(params[:page]).per(5)
       else
-        @tasks = Task.order(created_at: :desc).page(params[:page]).per(5)
+        @tasks = current_user.tasks.order(created_at: :desc).page(params[:page]).per(5)
       end
     else
-      @tasks = Task.order(created_at: :desc).page(params[:page]).per(5)
+      @tasks = current_user.tasks.order(created_at: :desc).page(params[:page]).per(5)
     end
   end
 
@@ -26,7 +31,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(task_params)
+    @task = current_user.tasks.build(task_params)
     if params[:back]
       render :new
     else
@@ -50,11 +55,13 @@ class TasksController < ApplicationController
   end
 
   def confirm
-    @task = Task.new(task_params)
+    @task = current_user.tasks.build(task_params)
     render :new if @task.invalid?
   end
 
   def show
+    # @task = Task.find_by(id: params[:id])
+    # @user = User.find_by(id: @task.user_id)
   end
 
   def destroy
@@ -64,7 +71,7 @@ class TasksController < ApplicationController
 
   private
   def task_params
-    params.require(:task).permit(:title, :content, :limit, :status_name, :priority)
+    params.require(:task).permit(:title, :content, :limit, :status_name, :priority, :user_id)
   end
 
   def set_task

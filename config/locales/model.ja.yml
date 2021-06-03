@@ -9,3 +9,11 @@ ja:
         limit: 終了日
         status_name: ステータス
         priority: 優先度
+      user:
+        name: 名前
+        email: メールアドレス
+        current_password: 現在のパスワード
+        password: パスワード
+        password_confirmation: 確認用パスワード
+        remember_me: ログインを記憶
+        admin: 管理者
