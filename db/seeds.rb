@@ -15,3 +15,18 @@ User.create!( name: name,
               password_confirmation: password,
               admin: true
             )
+
+Label.create!(
+  [
+    {name: '見積'},
+    {name: 'E-TKT'},
+    {name: 'PAX FNL'},
+    {name: 'NEW BOOK'},
+    {name: 'REBOOK'},
+    {name: '新規営業'},
+    {name: 'アポ'},
+    {name: '保険'},
+    {name: 'NET CHK'},
+    {name: 'FNL CHK'}
+  ]
+)
