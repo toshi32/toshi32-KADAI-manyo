@@ -1,7 +1,7 @@
 <article class="admin_show">
   <h2>管理画面：ユーザー情報詳細</h2>
   <% if notice %>
-    <p class="alert alert-info"><%= notice %></p>
+  <p class="alert alert-info"><%= notice %></p>
   <% end %>
   <section class="profile">
     <p><span class="item_name">ID</span> <%= @user.id %></p>
@@ -23,10 +23,15 @@
         <p><span class="item_name">ステータス</span> <%= task.status_name %></p>
         <p><span class="item_name">優先度</span> <%= task.priority %></p>
       </div>
+      <div class="label_block">
+        <% task.labels.each do |label| %>
+        <span class="label label-success"><%= label.name %></span>
+        <% end %>
+      </div>
       <div class="btns">
         <div class="innerblock">
           <%= link_to '詳細を確認する', task_path(task.id), class: "show_task" %>
-          <%= link_to "タスクを編集する", edit_task_path(task.id), data: { confirm: '本当に編集していいですか？' }, class: "edit_task" %>
+          <%= link_to "タスクを編集する", edit_task_path(task.id), class: "edit_task" %>
           <%= link_to 'タスクを削除する', task_path(task.id), method: :delete ,data: { confirm: '本当に削除していいですか？' }, class: "delete_task" %>
         </div>
       </div>

@@ -1,4 +1,4 @@
-<%= form_with(model: @task, local: true ,url: choose_new_or_edit ) do |form| %>
+<%= form_with(model: @task, local: true ) do |form| %>
 <% if @task.errors.any? %>
 <div id="error_explanation">
   <h2><%= @task.errors.count %>件のエラーがあります。</h2>
@@ -30,8 +30,10 @@
   <%= form.select :priority, Task.priorities.keys %>
 </div>
 <div class="field">
-  <%= form.collection_check_boxes(:label_ids, Label.all, :id, :name) %>
+  <%= form.collection_check_boxes(:label_ids, Label.all, :id, :name) do |b|
+        b.label(:"data-value" => b.value) { b.check_box + b.text }
+      end %>
 </div>
-<%= form.submit %>
+<%= form.submit "登録する", data: { confirm: "本当に登録していいですか？"} %>
 <% end %>
 <%= link_to "タスク一覧にもどる", tasks_path %>

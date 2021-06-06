@@ -25,11 +25,11 @@
     <td><strong>終了日: </strong><%= l task.limit, format: :long %></td>
     <td><strong>ステータス: </strong><%= task.status_name %></td>
     <td><strong>優先度: </strong><%= task.priority %></td>
-      <div class="label_block">
-        <% task.labels.each do |label| %>
-          <span><%= label.name %></span>
-        <% end %>
-      </div>
+    <div class="label_block">
+      <% task.labels.each do |label| %>
+      <span><%= label.name %></span>
+      <% end %>
+    </div>
   </tr>
   <td><%= link_to 'タスクの詳細確認', task_path(task.id) %></td>
   <td><%= link_to 'タスクを編集する', edit_task_path(task.id), data: { confirm: '本当に編集していいですか？' } %></td>

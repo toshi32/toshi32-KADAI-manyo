@@ -11,4 +11,9 @@
 <p><%= @task.status_name %></p>
 <p>優先度</p>
 <p><%= @task.priority %></p>
+<div class="label_block">
+  <% @task.labels.each do |label| %>
+  <%= label.name %></span>
+  <% end %>
+</div>
 <p><%= link_to 'Back', tasks_path(@task) %></p>
