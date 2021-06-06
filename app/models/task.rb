@@ -6,6 +6,7 @@ class Task < ApplicationRecord
   validates :user_id, presence: true
   scope :search_title, -> (search_title) { where("title LIKE ?", "%#{search_title}%") }
   scope :search_status, -> (search_status) { where(status_name: search_status)}
+  scope :search_label, -> (search_label) { joins(:labels).where(labels: { id: search_label })}
   enum status_name: { 未着手: 1, 着手: 2, 完了: 3 }
   enum priority: { 低: 1, 中: 2, 高: 3}
   belongs_to :user
