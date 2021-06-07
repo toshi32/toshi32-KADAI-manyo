@@ -27,6 +27,7 @@
     <td><strong>終了日: </strong><%= l task.limit, format: :long %></td>
     <td><strong>ステータス: </strong><%= task.status_name %></td>
     <td><strong>優先度: </strong><%= task.priority %></td>
+    <td><strong>ラベル: </strong></td>
     <td>
       <% task.labels.each do |label| %>
       <%= label.name %>
