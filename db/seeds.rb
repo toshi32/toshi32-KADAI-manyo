@@ -31,3 +31,26 @@ Label.create!(
   ]
 )
 
+10.times do |n|
+  name = Faker::Games::Pokemon.name
+  email = Faker::Internet.email
+  password = "password"
+  User.create!(name: name,
+                email: email,
+                password: password,
+                password_confirmation: password,
+                admin: false
+                )
+end
+
+10.times do |n|
+  title = Faker::Games::Pokemon.move
+  content = Faker::Games::Pokemon.location
+  limit = Faker::Date.between(from: '2021-05-27', to: '2021-09-27')
+  user_id = n + 1
+  Task.create!(title: title,
+                content: content,
+                limit: limit,
+                user_id: user_id
+                )
+end
