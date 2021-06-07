@@ -30,3 +30,4 @@ Label.create!(
     {name: 'FNL CHK'}
   ]
 )
+

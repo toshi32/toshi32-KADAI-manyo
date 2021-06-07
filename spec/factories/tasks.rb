@@ -5,7 +5,6 @@ FactoryBot.define do
     limit { '2021-05-10' }
     status_name { 1 }
     priority { 1 }
-    #association :user
   end
   factory :task2, class: "Task" do
     title { 'task2' }
@@ -21,6 +20,5 @@ FactoryBot.define do
     limit { '2021-04-30' }
     status_name { 3 }
     priority { 3 }
-    #association :user
   end
 end

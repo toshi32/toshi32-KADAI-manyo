@@ -23,9 +23,12 @@ RSpec.describe 'タスク管理機能', type: :system do
         # find("#task_limit_1i").find("option[value='2021']").select_option
         # find("#task_limit_2i").find("option[value='2']").select_option
         # find("#task_limit_3i").find("option[value='2']").select_option
-        # find("#task_status_name").find("option[value='1']").select_option
+        # find("#task_status_name").find("option[value='未着手']").select_option
         # find("#task_priority").find("option[value='低']").select_option
-        click_on '登録する'
+        # click_on '登録する'
+          page.accept_confirm do
+            click_on '登録する'
+          end
         expect(page).to have_content 'task_name'
         expect(page).to have_content 'task_content'
         # expect(page).to have_content '低'
@@ -60,6 +63,7 @@ RSpec.describe 'タスク管理機能', type: :system do
       within '.sort_select' do
         click_on '優先度で並び変える'
       end
+      sleep(0.5)
       task_list = all('.task_row')
       expect(task_list[0]).to have_content 'task'
     end
