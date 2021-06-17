@@ -8,12 +8,14 @@
 </div>
 <div class="search_box">
   <%= form_with(local: true, method: :get, url: tasks_path ) do |form| %>
-  <%= form.label :search_title, "タスク名" %>
-  <%= form.text_field :search_title, placeholder: "タスク名で検索" %>
-  <%= form.label :search_status, "ステータス" %>
-  <%= form.select :search_status, ['未着手', '着手', '完了'], { include_blank: '選択してください'} %>
-  <%= form.submit "検索", name: "search" %>
-  <% end %>
+  <td><%= form.label :search_title, "タスク名" %>
+    <%= form.text_field :search_title, placeholder: "タスク名で検索" %>
+  <td><%= form.label :search_status, "ステータス" %>
+    <%= form.select :search_status, ['未着手', '着手', '完了'], { include_blank: '選択してください'} %>
+  <td><%= form.label :search_label, "ラベル" %>
+    <%= form.select :search_label, Label.pluck(:name, :id), { include_blank: '選択してください' } %>
+  <td><%= form.submit "検索", name: "search" %>
+    <% end %>
 </div>
 <table>
   <% @tasks.each do |task| %>
@@ -25,6 +27,12 @@
     <td><strong>終了日: </strong><%= l task.limit, format: :long %></td>
     <td><strong>ステータス: </strong><%= task.status_name %></td>
     <td><strong>優先度: </strong><%= task.priority %></td>
+    <td><strong>ラベル: </strong></td>
+    <td>
+      <% task.labels.each do |label| %>
+      <%= label.name %>
+      <% end %>
+    </td>
   </tr>
   <td><%= link_to 'タスクの詳細確認', task_path(task.id) %></td>
   <td><%= link_to 'タスクを編集する', edit_task_path(task.id), data: { confirm: '本当に編集していいですか？' } %></td>

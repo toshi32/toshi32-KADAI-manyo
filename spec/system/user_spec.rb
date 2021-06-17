@@ -8,10 +8,7 @@ RSpec.describe 'ユーザー登録機能', type: :system do
         fill_in "user[email]", with: "test@test.com"
         fill_in "user[password]", with: "password"
         fill_in "user[password_confirmation]", with: "password"
-        click_on '登録する'
-        # fill_in "session[email]", with: "test@test.com"
-        # fill_in "session[password]", with: "password"
-        # click_on 'commit'
+        click_on 'Create User'
         expect(page).to have_content 'test_user'
         expect(page).to have_content 'test@test.com'
       end
@@ -19,9 +16,6 @@ RSpec.describe 'ユーザー登録機能', type: :system do
     context 'ログインせずにタスク一覧画面に飛んだ場合' do
       it 'ログイン画面に遷移する' do
         visit tasks_path
-        # expect(page).to have_content "ログイン"
-        # expect(page).to have_content "メールアドレス"
-        # expect(page).to have_content "パスワード"
         expect(current_path).to eq new_session_path
       end
     end
@@ -115,7 +109,7 @@ RSpec.describe 'ユーザー登録機能', type: :system do
         fill_in "user[email]", with: "test@test.com"
         fill_in "user[password]", with: "password"
         fill_in "user[password_confirmation]", with: "password"
-        click_on '登録する'
+        click_on 'Create User'
         expect(page).to have_content 'ユーザー情報を登録しました'
         expect(page).to have_content '管理画面：ユーザー情報詳細'
       end
@@ -154,7 +148,7 @@ RSpec.describe 'ユーザー登録機能', type: :system do
         fill_in "user[email]", with: "edit@edit.com"
         fill_in "user[password]", with: "password_edit"
         fill_in "user[password_confirmation]", with: "password_edit"
-        click_on '更新する'
+        click_on 'Update User'
         expect(page).to have_content 'ユーザー情報を編集しました'
         expect(page).to have_content '管理画面：ユーザー情報詳細'
         expect(page).to have_content 'edit_user'
